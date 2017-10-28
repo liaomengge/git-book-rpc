@@ -8,6 +8,90 @@ dubbox使用的rest服务，是当当基于resteasy集成的，故只需要扩�
 
 ```
 新建resources/META-INF/services/javax.ws.rs.ext.Providers目录，并添加自定义的Provider的package name
+
+如：cn.sh.pdxq.jerry.extension.JacksonProvider 
+```
+
+2. 编辑自定义的Provider
+
+此处是以Unicode兼容GBK和UTF-8来处理的
+
+```
+@Provider
+@Produces({"application/json", "application/*+json", "text/json"})
+public class JacksonProvider extends JacksonJsonProvider {
+
+    public JacksonProvider() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.setTimeZone(TimeZone.getDefault());
+
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        //使Jackson JSON支持Unicode编码非ASCII字符
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(String.class, new StringUnicodeSerializer());
+        objectMapper.registerModule(module);
+        //设置null值不参与序列化(字段不被显示)
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        setMapper(objectMapper);
+    }
+
+    class StringUnicodeSerializer extends JsonSerializer<String> {
+
+        private final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
+        private final int[] ESCAPE_CODES = CharTypes.get7BitOutputEscapes();
+
+        private void writeUnicodeEscape(JsonGenerator gen, char c) throws IOException {
+            gen.writeRaw('\\');
+            gen.writeRaw('u');
+            gen.writeRaw(HEX_CHARS[(c >> 12) & 0xF]);
+            gen.writeRaw(HEX_CHARS[(c >> 8) & 0xF]);
+            gen.writeRaw(HEX_CHARS[(c >> 4) & 0xF]);
+            gen.writeRaw(HEX_CHARS[c & 0xF]);
+        }
+
+        private void writeShortEscape(JsonGenerator gen, char c) throws IOException {
+            gen.writeRaw('\\');
+            gen.writeRaw(c);
+        }
+
+        @Override
+        public void serialize(String str, JsonGenerator gen,
+                              SerializerProvider provider) throws IOException {
+            int status = ((JsonWriteContext) gen.getOutputContext()).writeValue();
+            switch (status) {
+                case JsonWriteContext.STATUS_OK_AFTER_COLON:
+                    gen.writeRaw(':');
+                    break;
+                case JsonWriteContext.STATUS_OK_AFTER_COMMA:
+                    gen.writeRaw(',');
+                    break;
+                case JsonWriteContext.STATUS_EXPECT_NAME:
+                    throw new JsonGenerationException("Can Not Write String Value Here", gen);
+            }
+            gen.writeRaw('"');//写入JSON中字符串的开头引号
+            for (char c : str.toCharArray()) {
+                if (c >= 0x80) {
+                    writeUnicodeEscape(gen, c); // 为所有非ASCII字符生成转义的unicode字符
+                } else {
+                    // 为ASCII字符中前128个字符使用转义的unicode字符
+                    int code = (c < ESCAPE_CODES.length ? ESCAPE_CODES[c] : 0);
+                    if (code == 0) {
+                        gen.writeRaw(c); // 此处不用转义
+                    } else if (code < 0) {
+                        writeUnicodeEscape(gen, (char) (-code - 1)); // 通用转义字符
+                    } else {
+                        writeShortEscape(gen, (char) code); // 短转义字符 (\n \t ...)
+                    }
+                }
+            }
+            gen.writeRaw('"');//写入JSON中字符串的结束引号
+        }
+
+    }
+}
 ```
 
 
