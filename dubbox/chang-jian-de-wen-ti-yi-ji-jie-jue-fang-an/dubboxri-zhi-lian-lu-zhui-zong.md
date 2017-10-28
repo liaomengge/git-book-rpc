@@ -4,7 +4,7 @@
 
 下面，贴出主要实现代码，其实也比较简单，就不多解释了。
 
-1. 过滤处理
+1、过滤处理
 
 ```
 @Component("traceFilter")
@@ -25,7 +25,7 @@ public class TraceFilter implements Filter {
 }
 ```
 
-2. 工具类
+2、工具类
 
 ```
 public final class TraceLogUtil {
