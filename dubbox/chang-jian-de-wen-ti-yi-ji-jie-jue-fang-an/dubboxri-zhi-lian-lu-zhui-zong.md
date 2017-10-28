@@ -25,7 +25,7 @@ public class TraceFilter implements Filter {
 }
 ```
 
-  2. 工具类
+2. 工具类
 
 ```
 public final class TraceLogUtil {
