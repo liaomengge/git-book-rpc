@@ -15,4 +15,6 @@
     * [Loop Scan Db/Redis](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/loop-scan-dbredis.md)
     * [最小堆队列](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/zui-xiao-dui-dui-lie.md)
     * [环形队列-时间轮](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/huan-xing-dui-5217-shi-jian-lun.md)
+    * [Redis Sort Set](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/redis-sort-set.md)
+    * [Redis KeySpace Notifications](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/redis-keyspace-notifications.md)
 
