@@ -4,7 +4,7 @@
 
 dubbox使用的rest服务，是当当基于resteasy集成的，故只需要扩展这一部分，即可，所以，只需要我们扩展自定义的Provider（将返回的数据按自定的需求输出）。
 
-1. 在资源目录文件下，创建自定义Provider
+1、在资源目录文件下，创建自定义Provider
 
 ```
 新建resources/META-INF/services/javax.ws.rs.ext.Providers目录，并添加自定义的Provider的package name
@@ -12,7 +12,7 @@ dubbox使用的rest服务，是当当基于resteasy集成的，故只需要扩�
 如：cn.sh.pdxq.jerry.extension.JacksonProvider
 ```
 
-1. 编辑自定义的Provider
+2、编辑自定义的Provider
 
 此处是以Unicode兼容GBK和UTF-8来处理的
 
