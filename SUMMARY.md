@@ -10,8 +10,6 @@
 * Spring Clould
 * [常见的项目设计](chang-jian-de-xiang-mu-she-ji.md)
   * [延时任务处理](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li.md)
-    * [内存型处理 - 数据易丢失，需要固化](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/nei-cun-xing-chu-li-shu-ju-yi-diu-shi-ff0c-xu-yao-gu-hua.md)
-    * [分布式型 - 数据不易丢失](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/fen-bu-shi-xing-shu-ju-bu-yi-diu-shi.md)
     * [Loop Scan Db/Redis](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/loop-scan-dbredis.md)
     * [最小堆队列](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/zui-xiao-dui-dui-lie.md)
     * [环形队列-时间轮](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/huan-xing-dui-5217-shi-jian-lun.md)
