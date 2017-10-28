@@ -17,4 +17,5 @@
     * [环形队列-时间轮](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/huan-xing-dui-5217-shi-jian-lun.md)
     * [Redis Sort Set](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/redis-sort-set.md)
     * [Redis KeySpace Notifications](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/redis-keyspace-notifications.md)
+    * [MQ DLE/DLQ](chang-jian-de-xiang-mu-she-ji/yan-shi-ren-wu-chu-li/mq-dledlq.md)
 
